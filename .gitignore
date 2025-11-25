@@ -1,0 +1,51 @@
+# ============================================
+# PYTHON / VENV
+# ============================================
+
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+*.pdb
+*.pkl
+
+# Virtual env
+.venv/
+venv/
+env/
+
+# Cache
+*.cache
+*.pytest_cache/
+
+# ============================================
+# LOGS / TEMP / ARTEFATOS DE SAÍDA
+# ============================================
+
+saida/
+entrada/
+trace/
+*.log
+*.tmp
+
+# Não versionar PDFs de entrada
+*.pdf
+
+# Arquivos Excel gerados
+*.xlsx
+*.xlsm
+
+# ============================================
+# SISTEMA / EDITORES
+# ============================================
+
+# VS Code
+.vscode/
+.history/
+
+# JetBrains
+.idea/
+
+# Windows
+Thumbs.db
+desktop.ini

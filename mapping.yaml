@@ -1,0 +1,152 @@
+# Planilha de destino
+output_sheet: "Inclusão"
+
+# Mapeia chave canônica -> Cabeçalho na planilha (EXATOS do modelo)
+output_columns:
+  beneficiario_nome: "Nome Completo do Beneficiário"
+  beneficiario_grau_dependencia: "Grau de Dependência"
+  sos_sn: "SOS\nS/N"
+  beneficiario_cnpj_lotacao: "Número da Lotação ou CNPJ"
+  beneficiario_tipo_acomodacao: "Tipo de Acomodação"
+  beneficiario_inclusao: "Inclusão 24h ou programada"
+  cpf: "CPF"
+  nascimento: "Data Nasc"
+  nacionalidade: "Nacionalidade"
+  estado_civil: "Estado Civil"
+  sexo: "Sexo"
+  mae_nome: "Nome da mãe"
+  titular_nome: "Nome Completo do Titular (se for inclusão de  dependente)"
+  pis: "PIS"
+  cbo: "CBO"
+  data_admissao: "Data Admissão"
+  titular_matricula: "Nº matrícula"
+  cep: "CEP"
+  numero: "Nº"
+  complemento: "Complemento"
+  email: "e-mail"
+  ddd: "DDD"
+  celular: "Celular"
+
+# Campos obrigatórios do MVP
+required_fields:
+  - beneficiario_nome
+  - cpf
+  - nascimento
+  - titular_nome
+  - data_admissao
+  - titular_matricula
+
+# Sinônimos/labels (para achar nos PDFs; acentos/caixa ignorados)
+synonyms:
+  beneficiario_nome:
+    - "nome do beneficiário"
+    - "nome beneficiario"
+    - "beneficiário"
+    - "beneficiario"
+    - "nome completo do beneficiário"
+    - "nome do colaborador"
+    - "nome do funcionário"
+    - "nome do empregado"
+    - "colaborador"
+    - "funcionário"
+    - "empregado"
+
+  beneficiario_grau_dependencia: ["grau de dependência", "grau dependencia", "dependência", "dependencia"]
+
+  beneficiario_cnpj_lotacao: ["número da lotação", "numero da lotacao", "nº da lotação", "lotação", "lotacao", "cnpj"]
+
+  beneficiario_tipo_acomodacao: ["tipo de acomodação", "acomodação", "acomodacao"]
+
+  beneficiario_inclusao: ["inclusão", "inclusao", "tipo de inclusão", "tipo inclusao", "inclusão 24h ou programada", "24h", "24 h", "programada", "agendada"]
+
+  cpf: ["cpf"]
+
+  nascimento: ["data de nascimento", "nascimento", "dt. nasc", "dt nasc", "dn", "data nasc", "dt. nascimento"]
+
+  nacionalidade: ["nacionalidade"]
+
+  estado_civil: ["estado civil"]
+
+  sexo: ["sexo", "genero", "gênero"]
+
+  mae_nome: ["nome da mãe", "nome da mae", "mãe", "mae", "Mãe:"]
+
+  titular_nome:
+    - "nome do titular"
+    - "titular"
+    - "nome completo do titular"
+    - "nome do colaborador"
+    - "nome do funcionário"
+    - "nome do empregado"
+
+  pis: ["pis", "nis", "pispasep", "pasep", "pis/pasep"]
+
+  cbo: ["cbo"]
+
+  data_admissao: ["data de admissão", "admissão", "admissao", "dt admissao", "dt. admissão", "data admissão", "data de admit", "admitido em"]
+
+  titular_matricula:
+    - "nº matrícula"
+    - "n° matrícula"
+    - "numero matricula"
+    - "nº de matrícula"
+    - "matrícula"
+    - "matricula"
+    - "matrícula nº"
+    - "matricula nº"
+    - "registro"
+    - "id funcional"
+    - "id"
+    - "ficha"           # ex.: "Ficha: 970016778"
+
+  cep: ["cep"]
+
+  # Endereço — evite termos genéricos para não confundir com "Nº matrícula"
+  numero:
+    - "nº do endereço"
+    - "número do endereço"
+    - "numero do endereco"
+    - "n° do endereço"
+    - "nº endereço"
+    - "nº do end."
+    - "numero end"
+    - "número end"
+
+  complemento: ["complemento"]
+
+  email: ["e-mail", "email"]
+
+  ddd: ["ddd"]
+
+  celular: ["celular", "telefone", "tel", "cel"]
+
+  sos_sn: ["sos", "s/n", "sos s/n"]
+
+# Normalização de valores
+normalize:
+  sexo:
+    map:
+      "m": "M"
+      "masculino": "M"
+      "f": "F"
+      "feminino": "F"
+  beneficiario_inclusao:
+    map:
+      "24": "24h"
+      "24h": "24h"
+      "24 h": "24h"
+      "programada": "Programada"
+      "agendada": "Programada"
+
+# Padrões genéricos (aplicados quando não há label claro)
+patterns:
+  cpf: "\\b\\d{3}[.\\s]?\\d{3}[.\\s]?\\d{3}-?\\d{2}\\b"
+  data: "\\b\\d{1,2}[\\-/]\\d{1,2}[\\-/]\\d{2,4}\\b"
+  cnpj: "\\b\\d{2}[.]?\\d{3}[.]?\\d{3}[\\/]?\\d{4}-?\\d{2}\\b"
+  # aceita 18950-059, 18.950-059 e 18 950-059
+  cep: "\\b(?:\\d{5}-?\\d{3}|\\d{2}[.\\s]?\\d{3}-?\\d{3})\\b"
+  email: "[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\\.[A-Za-z]{2,}"
+  # 11 dígitos com ou sem separadores (ex.: 209.67062.37.8)
+  pis: "(?<!\\d)(?:\\d\\D?){11}(?!\\d)"
+  cbo: "\\b\\d{6}\\b|\\b\\d{4}-\\d\\b"
+  celular: "\\b(?:\\(?\\d{2}\\)?\\s*)?9?\\d{4}[-\\s]?\\d{4}\\b"
